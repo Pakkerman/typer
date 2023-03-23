@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import KeyButton from './KeyButton'
 
 const KEYS = [
   'A',
@@ -28,18 +29,43 @@ const KEYS = [
   'Y',
   'Z',
 ]
+const FIRST_ROW = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']']
+const SECOND_ROW = ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', "'"]
+const THIRD_ROW = ['Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '/']
 
 const Keyboard = () => {
+  function handleClick(event: any) {
+    console.log('clicked ' + event.target.value)
+  }
+
+  function handleKeyDown(event: KeyboardEvent) {
+    console.log('keyPressed', event.key)
+  }
+  useEffect(() => {
+    document.addEventListener('keydown', (event) => handleKeyDown(event))
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [])
+
   return (
-    <div className="flex flex-col space-y-2 ">
-      {KEYS.map((letter) => (
-        <button
-          key={letter}
-          className="w-10 h-10 text-white transition border-2 border-red-400 rounded-md hover:bg-red-500 "
-        >
-          {letter}
-        </button>
-      ))}
+    <div className="relative" id="keyboard">
+      <div className="flex m-2 space-x-2">
+        {FIRST_ROW.map((letter) => (
+          <KeyButton key={letter} letter={letter} onClick={handleClick} />
+        ))}
+      </div>
+      <div className="flex m-2 space-x-2 translate-x-[25px]">
+        {SECOND_ROW.map((letter) => (
+          <KeyButton key={letter} letter={letter} onClick={handleClick} />
+        ))}
+      </div>
+      <div className="flex m-2 space-x-2 translate-x-[50px]">
+        {THIRD_ROW.map((letter) => (
+          <KeyButton key={letter} letter={letter} onClick={handleClick} />
+        ))}
+      </div>
     </div>
   )
 }
