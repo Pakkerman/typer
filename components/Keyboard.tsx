@@ -1,6 +1,6 @@
 import React from 'react'
 
-const letters = [
+const KEYS = [
   'A',
   'B',
   'C',
@@ -30,7 +30,18 @@ const letters = [
 ]
 
 const Keyboard = () => {
-  return <div></div>
+  return (
+    <div className="flex flex-col space-y-2 ">
+      {KEYS.map((letter) => (
+        <button
+          key={letter}
+          className="w-10 h-10 text-white transition border-2 border-red-400 rounded-md hover:bg-red-500 "
+        >
+          {letter}
+        </button>
+      ))}
+    </div>
+  )
 }
 
 export default Keyboard
