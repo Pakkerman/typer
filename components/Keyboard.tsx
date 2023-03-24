@@ -9,7 +9,7 @@ interface KeyboardProps {
   setInput: React.Dispatch<React.SetStateAction<string>>
 }
 
-const Keyboard: React.FC<KeyboardProps> = ({ setInput }) => {
+const Keyboard: React.FC<KeyboardProps> = ({ setInput, dispatch }) => {
   const [activeKey, setActiveKey] = useState<string[]>([])
 
   function handleClick(event: any) {
@@ -24,6 +24,7 @@ const Keyboard: React.FC<KeyboardProps> = ({ setInput }) => {
 
   function handleInput(letter: string) {
     setInput((prev) => prev + letter)
+    dispatch({ type: 'backspace', letter: letter })
 
     setActiveKey((prev) => [...prev, letter])
     setTimeout(
@@ -34,7 +35,9 @@ const Keyboard: React.FC<KeyboardProps> = ({ setInput }) => {
 
   useEffect(() => {
     document.addEventListener('keydown', (event) => handleKeyDown(event))
+    console.log('added eventlistener')
     return () => {
+      console.log('removed eventlistener')
       document.removeEventListener('keydown', handleKeyDown)
     }
   }, [])
