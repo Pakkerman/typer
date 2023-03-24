@@ -6,13 +6,16 @@ const test = 'this is a string of text'
 
 const initialInput = '123'
 
-function inputReducer(state, action) {
+function inputReducer(state: string, action: { type: string; letter: string }) {
   switch (action.type) {
     case 'letterInput': {
       return state + action.letter
     }
     case 'backspace': {
       return state.slice(0, -1)
+    }
+    default: {
+      return state
     }
   }
 }

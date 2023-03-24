@@ -7,6 +7,7 @@ const THIRD_ROW = ['z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/']
 
 interface KeyboardProps {
   setInput: React.Dispatch<React.SetStateAction<string>>
+  dispatch: React.Dispatch<{ type: string; letter: string }>
 }
 
 const Keyboard: React.FC<KeyboardProps> = ({ setInput, dispatch }) => {
