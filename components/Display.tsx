@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 
-const Display = () => {
-  const [text, setText] = useState('this is Text')
+interface DisplayProps {
+  text: string[]
+}
 
-  return <div className="text-2xl text-center text-white">{text}</div>
+const Display: React.FC<DisplayProps> = ({ text }) => {
+  console.log(text)
+  return <div className="text-2xl text-center text-white">{text.join('')}</div>
 }
 
 export default Display
